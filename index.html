@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmallFirm HRMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand">
+          <div class="brand-mark">HR</div>
+          <div>
+            <p class="eyebrow">Small firm suite</p>
+            <h1>PeopleDesk</h1>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-section="dashboard">Dashboard</button>
+          <button class="nav-item" data-section="employees">Employee Details</button>
+          <button class="nav-item" data-section="leaves">Leaves</button>
+          <button class="nav-item" data-section="attendance">Attendance</button>
+          <button class="nav-item" data-section="payroll">Payroll System</button>
+        </nav>
+        <div class="sidebar-card">
+          <span>Headcount Plan</span>
+          <strong>20 employees</strong>
+          <small>Designed for compact teams with simple HR workflows.</small>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">HRMS workspace</p>
+            <h2 id="page-title">Homepage Dashboard</h2>
+          </div>
+          <div class="topbar-actions">
+            <div class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input id="employee-search" type="search" placeholder="Search employees" aria-label="Search employees" />
+            </div>
+            <button class="primary-btn" id="add-employee-btn">+ Add Employee</button>
+          </div>
+        </header>
+
+        <section class="hero section-view active" id="dashboard">
+          <div class="hero-copy">
+            <p class="eyebrow">Today overview</p>
+            <h3>All-in-one HRMS for a 20 headcount business</h3>
+            <p>Track employees, leave approvals, attendance health, and monthly payroll from one lightweight dashboard.</p>
+          </div>
+          <div class="hero-panel">
+            <span>May payroll readiness</span>
+            <strong id="payroll-readiness">0%</strong>
+            <div class="progress"><span id="readiness-bar"></span></div>
+          </div>
+        </section>
+
+        <section class="stats-grid section-view active" data-dashboard-block>
+          <article class="stat-card">
+            <span>Total Headcount</span>
+            <strong id="total-headcount">0</strong>
+            <small>Active employees</small>
+          </article>
+          <article class="stat-card">
+            <span>Present Today</span>
+            <strong id="present-count">0</strong>
+            <small id="present-rate">0% attendance rate</small>
+          </article>
+          <article class="stat-card">
+            <span>Pending Leaves</span>
+            <strong id="pending-leaves">0</strong>
+            <small>Awaiting approval</small>
+          </article>
+          <article class="stat-card">
+            <span>Payroll Cost</span>
+            <strong id="payroll-cost">$0</strong>
+            <small>Estimated monthly gross</small>
+          </article>
+        </section>
+
+        <section class="content-grid section-view active" data-dashboard-block>
+          <article class="panel wide">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Department mix</p>
+                <h3>Team distribution</h3>
+              </div>
+            </div>
+            <div class="department-bars" id="department-bars"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Action list</p>
+                <h3>HR tasks</h3>
+              </div>
+            </div>
+            <ul class="task-list" id="task-list"></ul>
+          </article>
+        </section>
+
+        <section class="panel section-view" id="employees">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Employee details</p>
+              <h3>People directory</h3>
+            </div>
+            <span class="pill" id="directory-count">0 records</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Department</th>
+                  <th>Status</th>
+                  <th>Join Date</th>
+                  <th>Salary</th>
+                </tr>
+              </thead>
+              <tbody id="employee-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section-view" id="leaves">
+          <div class="split-layout">
+            <article class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Leave management</p>
+                  <h3>Request leave</h3>
+                </div>
+              </div>
+              <form id="leave-form" class="form-stack">
+                <label>Employee
+                  <select id="leave-employee" required></select>
+                </label>
+                <label>Leave type
+                  <select id="leave-type" required>
+                    <option>Annual Leave</option>
+                    <option>Sick Leave</option>
+                    <option>Personal Leave</option>
+                    <option>Work From Home</option>
+                  </select>
+                </label>
+                <div class="two-col">
+                  <label>From
+                    <input id="leave-from" type="date" required />
+                  </label>
+                  <label>To
+                    <input id="leave-to" type="date" required />
+                  </label>
+                </div>
+                <button class="primary-btn" type="submit">Submit Request</button>
+              </form>
+            </article>
+            <article class="panel wide">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Leave approvals</p>
+                  <h3>Current requests</h3>
+                </div>
+              </div>
+              <div class="cards-list" id="leave-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel section-view" id="attendance">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Attendance</p>
+              <h3>Daily register</h3>
+            </div>
+            <button class="secondary-btn" id="mark-all-present">Mark all present</button>
+          </div>
+          <div class="attendance-grid" id="attendance-grid"></div>
+        </section>
+
+        <section class="section-view" id="payroll">
+          <div class="content-grid single">
+            <article class="panel wide">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Payroll system</p>
+                  <h3>Monthly payroll run</h3>
+                </div>
+                <span class="pill">May 2026</span>
+              </div>
+              <div class="payroll-summary">
+                <div><span>Gross Pay</span><strong id="gross-pay">$0</strong></div>
+                <div><span>Deductions</span><strong id="deductions">$0</strong></div>
+                <div><span>Net Pay</span><strong id="net-pay">$0</strong></div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Employee</th>
+                      <th>Base Salary</th>
+                      <th>Allowances</th>
+                      <th>Deductions</th>
+                      <th>Net Pay</th>
+                    </tr>
+                  </thead>
+                  <tbody id="payroll-table"></tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="employee-modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="close-btn" id="close-modal" aria-label="Close">×</button>
+        <p class="eyebrow">New starter</p>
+        <h3 id="modal-title">Add employee</h3>
+        <form id="employee-form" class="form-stack">
+          <label>Full name<input id="new-name" required placeholder="e.g. Aisha Kumar" /></label>
+          <label>Role<input id="new-role" required placeholder="e.g. HR Executive" /></label>
+          <label>Department
+            <select id="new-department">
+              <option>Operations</option>
+              <option>Sales</option>
+              <option>Finance</option>
+              <option>HR</option>
+              <option>Technology</option>
+            </select>
+          </label>
+          <label>Monthly salary<input id="new-salary" type="number" min="1000" step="100" required placeholder="4500" /></label>
+          <button class="primary-btn" type="submit">Save Employee</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
